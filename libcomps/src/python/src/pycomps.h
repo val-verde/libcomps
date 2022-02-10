@@ -21,7 +21,9 @@
 #define PYCOMPS_H
 
 #include <stddef.h>
+#if __has_include(<fnmatch.h>)
 #include <fnmatch.h>
+#endif
 
 #include "libcomps/comps_doc.h"
 #include "libcomps/comps_parse.h"

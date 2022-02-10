@@ -2,7 +2,9 @@
 
 #include <math.h>
 #include <stdio.h>
+#if __has_include(<fnmatch.h>)
 #include <fnmatch.h>
+#endif
 
 COMPS_Object * comps_object_create(COMPS_ObjectInfo *obj_info, COMPS_Object **args){
     COMPS_Object *obj;
@@ -180,10 +182,18 @@ void comps_str_set(COMPS_Str *str, char *s) {
     strcpy(str->val, s);
 }
 signed char comps_str_fnmatch(COMPS_Str *str, char *pattern, int flags) {
+#if __has_include(<fnmatch.h>)
     return fnmatch(pattern, str->val, flags) == 0;
+#else
+    return 0;
+#endif
 }
 signed char comps_str_fnmatch_o(COMPS_Str *str, COMPS_Str *pattern, int flags) {
+#if __has_include(<fnmatch.h>)
     return fnmatch(pattern->val, str->val, flags) == 0;
+#else
+    return 0;
+#endif
 }
 
 COMPS_ObjectInfo COMPS_Num_ObjInfo = {

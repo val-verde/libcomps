@@ -1092,7 +1092,9 @@ PyInit__libpycomps(void)
     PyModule_AddIntConstant(m, "PACKAGE_TYPE_MANDATORY", COMPS_PACKAGE_MANDATORY);
     PyModule_AddIntConstant(m, "PACKAGE_TYPE_UNKNOWN", COMPS_PACKAGE_UNKNOWN);
 
+#if __has_include(<fnmatch.h>)
     PyModule_AddIntConstant(m, "MATCH_IGNORECASE", FNM_CASEFOLD);
+#endif
 
     init_exceptions();
     Py_INCREF(PyCOMPSExc_ParserError);
